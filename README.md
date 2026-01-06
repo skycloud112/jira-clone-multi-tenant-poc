@@ -36,6 +36,16 @@ pnpm user:tenant1
 pnpm user:tenant2
 ```
 
+## Storybook
+
+Preview UI components with different tenant themes using Storybook:
+
+```bash
+cd packages/ui && pnpm storybook
+```
+
+Open http://localhost:6006 and use the tenant switcher in the toolbar (paintbrush icon) to toggle between Tenant 1 and Tenant 2 themes.
+
 ## Theming Architecture
 
 ### Design Tokens
