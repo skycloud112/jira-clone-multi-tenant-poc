@@ -3,10 +3,7 @@
 import React from 'react'
 import { Box, Container, Typography, Stack, Paper } from '@mui/material'
 import { AppHeader, IssueCard } from '@repo/ui'
-import { getTenantTokens } from '@repo/theme'
-
-const tenantName = process.env.NEXT_PUBLIC_TENANT || 'tenant1'
-const tokens = getTenantTokens(tenantName)
+import { TokensDemo } from './components/TokensDemo'
 
 const sampleIssues = [
   { key: 'PROJ-1', title: 'Setup project structure', status: 'done' as const },
@@ -17,44 +14,30 @@ const sampleIssues = [
 ]
 
 export default function AdminPage() {
-  const headerColors = {
-    background: tokens.colors.primary,
-    text: '#FFFFFF',
-  }
-
-  const cardColors = {
-    cardBorder: tokens.colors.border,
-    statusColors: {
-      todo: tokens.colors.textMuted,
-      inProgress: tokens.colors.warning,
-      done: tokens.colors.success,
-    },
-  }
-
   return (
     <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
-      <AppHeader
-        appName="Jira Clone - Admin"
-        tenantName={tokens.name}
-        colors={headerColors}
-      />
+      <AppHeader appName="Jira Clone - Admin" />
       <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Typography variant="h5" fontWeight={600} gutterBottom>
-          All Issues
-        </Typography>
-        <Paper sx={{ p: 3 }}>
-          <Stack spacing={2}>
-            {sampleIssues.map((issue) => (
-              <IssueCard
-                key={issue.key}
-                issueKey={issue.key}
-                title={issue.title}
-                status={issue.status}
-                colors={cardColors}
-              />
-            ))}
-          </Stack>
-        </Paper>
+        <Stack spacing={4}>
+          <TokensDemo />
+          <Box>
+            <Typography variant="h5" fontWeight={600} gutterBottom>
+              All Issues
+            </Typography>
+            <Paper sx={{ p: 3 }}>
+              <Stack spacing={2}>
+                {sampleIssues.map((issue) => (
+                  <IssueCard
+                    key={issue.key}
+                    issueKey={issue.key}
+                    title={issue.title}
+                    status={issue.status}
+                  />
+                ))}
+              </Stack>
+            </Paper>
+          </Box>
+        </Stack>
       </Container>
     </Box>
   )

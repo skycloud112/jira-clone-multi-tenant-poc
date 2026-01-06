@@ -8,6 +8,7 @@
     ".": "./index.tsx"
   },
   "dependencies": {
+    "@repo/theme": "workspace:*",
     "@mui/material": "^6.0.0",
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0"

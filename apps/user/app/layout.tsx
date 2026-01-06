@@ -2,10 +2,11 @@
 
 import React from 'react'
 import { ThemeProvider, CssBaseline } from '@mui/material'
-import { getTenantTheme } from '@repo/theme'
+import { DesignTokensProvider, getTenantTokens, createMuiTheme } from '@repo/theme'
 
 const tenantName = process.env.NEXT_PUBLIC_TENANT || 'tenant1'
-const theme = getTenantTheme(tenantName)
+const tokens = getTenantTokens(tenantName)
+const muiTheme = createMuiTheme(tokens)
 
 export default function RootLayout({
   children,
@@ -15,10 +16,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body style={{ margin: 0 }}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          {children}
-        </ThemeProvider>
+        <DesignTokensProvider tokens={tokens}>
+          <ThemeProvider theme={muiTheme}>
+            <CssBaseline />
+            {children}
+          </ThemeProvider>
+        </DesignTokensProvider>
       </body>
     </html>
   )

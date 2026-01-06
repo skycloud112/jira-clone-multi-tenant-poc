@@ -1,24 +1,24 @@
+'use client'
+
 import React from 'react'
 import { Box, Typography, Stack } from '@mui/material'
+import { useDesignTokens } from '@repo/theme'
 
 type BoardColumnProps = {
   title: string
   count: number
   children: React.ReactNode
-  colors: {
-    headerBg: string
-    headerText: string
-    columnBg: string
-  }
 }
 
-export const BoardColumn = ({ title, count, children, colors }: BoardColumnProps) => {
+export const BoardColumn = ({ title, count, children }: BoardColumnProps) => {
+  const tokens = useDesignTokens()
+
   return (
     <Box
       sx={{
         width: 280,
         minWidth: 280,
-        bgcolor: colors.columnBg,
+        bgcolor: tokens.colors.background,
         borderRadius: 1,
         display: 'flex',
         flexDirection: 'column',
@@ -28,14 +28,14 @@ export const BoardColumn = ({ title, count, children, colors }: BoardColumnProps
       <Box
         sx={{
           p: 1.5,
-          bgcolor: colors.headerBg,
+          bgcolor: tokens.colors.border,
           borderRadius: '4px 4px 0 0',
         }}
       >
         <Typography
           variant="subtitle2"
           fontWeight={600}
-          sx={{ color: colors.headerText }}
+          sx={{ color: tokens.colors.text }}
         >
           {title} ({count})
         </Typography>

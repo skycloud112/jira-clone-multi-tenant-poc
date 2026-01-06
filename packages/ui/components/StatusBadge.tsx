@@ -1,15 +1,13 @@
+'use client'
+
 import React from 'react'
 import { Chip } from '@mui/material'
+import { useDesignTokens } from '@repo/theme'
 
 type IssueStatus = 'todo' | 'in-progress' | 'done'
 
 type StatusBadgeProps = {
   status: IssueStatus
-  colors: {
-    todo: string
-    inProgress: string
-    done: string
-  }
 }
 
 const statusLabels: Record<IssueStatus, string> = {
@@ -18,11 +16,13 @@ const statusLabels: Record<IssueStatus, string> = {
   'done': 'Done',
 }
 
-export const StatusBadge = ({ status, colors }: StatusBadgeProps) => {
+export const StatusBadge = ({ status }: StatusBadgeProps) => {
+  const tokens = useDesignTokens()
+
   const colorMap: Record<IssueStatus, string> = {
-    'todo': colors.todo,
-    'in-progress': colors.inProgress,
-    'done': colors.done,
+    'todo': tokens.colors.textMuted,
+    'in-progress': tokens.colors.warning,
+    'done': tokens.colors.success,
   }
 
   return (

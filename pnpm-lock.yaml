@@ -106,7 +106,13 @@ importers:
       '@mui/material':
         specifier: ^6.0.0
         version: 6.5.0(@emotion/react@11.14.0(@types/react@18.3.27)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.27)(react@18.3.1))(@types/react@18.3.27)(react@18.3.1))(@types/react@18.3.27)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react:
+        specifier: ^18.0.0
+        version: 18.3.1
     devDependencies:
+      '@types/react':
+        specifier: ^18.2.0
+        version: 18.3.27
       typescript:
         specifier: ^5.3.0
         version: 5.9.3
@@ -122,6 +128,9 @@ importers:
       '@mui/material':
         specifier: ^6.0.0
         version: 6.5.0(@emotion/react@11.14.0(@types/react@18.3.27)(react@18.3.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@18.3.27)(react@18.3.1))(@types/react@18.3.27)(react@18.3.1))(@types/react@18.3.27)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@repo/theme':
+        specifier: workspace:*
+        version: link:../theme
       react:
         specifier: ^18.0.0
         version: 18.3.1
