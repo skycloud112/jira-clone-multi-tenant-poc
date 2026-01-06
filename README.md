@@ -48,6 +48,57 @@ Open http://localhost:6006 and use the tenant switcher in the toolbar (paintbrus
 
 ## Theming Architecture
 
+Design tokens are used in two ways:
+
+1. **MUI Theme** - Tokens are converted to an MUI theme via `createMuiTheme()`, which automatically styles all MUI components (Button, TextField, Typography, etc.)
+2. **Direct Access** - Components use `useDesignTokens()` hook to access tokens directly for custom styling
+
+### When to Use Each Approach
+
+| Approach | Use When |
+|----------|----------|
+| MUI Theme (automatic) | Using standard MUI components that respect theme palette |
+| `useDesignTokens()` hook | Custom styles, computed colors (e.g., status-based), non-MUI styling |
+
+### Example: MUI Theme (Automatic Styling)
+
+```typescript
+// MUI Button automatically uses tokens.colors.primary
+<Button variant="contained">Submit</Button>
+
+// Typography uses tokens.colors.text via theme
+<Typography color="text.primary">Hello</Typography>
+```
+
+### Example: useDesignTokens Hook (Direct Access)
+
+```typescript
+// StatusBadge.tsx - uses tokens directly for status-based colors
+const StatusBadge = ({ status }: StatusBadgeProps) => {
+  const tokens = useDesignTokens()
+
+  const colorMap: Record<IssueStatus, string> = {
+    'todo': tokens.colors.textMuted,
+    'in-progress': tokens.colors.warning,
+    'done': tokens.colors.success,
+  }
+
+  return <Chip sx={{ bgcolor: colorMap[status] }} />
+}
+
+// BoardColumn.tsx - uses tokens for custom background
+const BoardColumn = ({ title, children }: BoardColumnProps) => {
+  const tokens = useDesignTokens()
+
+  return (
+    <Box sx={{ bgcolor: tokens.colors.background }}>
+      <Box sx={{ bgcolor: tokens.colors.border }}>{title}</Box>
+      {children}
+    </Box>
+  )
+}
+```
+
 ### Design Tokens
 
 Each tenant has a set of design tokens defined in `packages/theme/tenants/`:
